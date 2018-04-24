@@ -1,0 +1,8 @@
+$user = $_SESSION["email"];
+
+
+mysqli_select_db($DB_con,"hrdb");
+$query_user_check = "SELECT * FROM staff_info WHERE staffid = '".$user."'";
+$user_check = mysqli_query($DB_con, $query_user_check) or die(mysqli_error());
+$row_user_check = mysqli_fetch_assoc($user_check);
+$totalRows_user_check = mysqli_num_rows($user_check);
