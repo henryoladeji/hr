@@ -1,6 +1,7 @@
 <?php include ("inc/header.inc.php"); ?>
 <?php include ("inc/total.inc.php"); ?>
 <?php include ("inc/total2.inc.php"); ?>
+<?php include ("inc/total3.inc.php"); ?>
 
 <?php
 
@@ -27,321 +28,23 @@ $all_applicants = mysqli_query($DB_con, $query_all_applicants)  or die(mysqli_er
 $row_all_applicants = mysqli_fetch_assoc($all_applicants);
 $totalRows_all_applicants = mysqli_num_rows($all_applicants);
 
+ mysqli_select_db($DB_con,"hrdb");
+ $query_all_vacancies = "SELECT * FROM vacancy_info ORDER BY vacancy_id ASC";
+ $all_vacancies = mysqli_query($DB_con, $query_all_vacancies)  or die(mysqli_error());
+ $row_all_vacancies = mysqli_fetch_assoc($all_vacancies);
+ $totalRows_all_vacancies = mysqli_num_rows($all_vacancies);
+
 
 ?>
 
 <!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
-      <a href="#" class="logo" style="font-size:30px; font-family:Georgia, 'Times New Roman', Times, serif; text-transform:none; font-weight:bold;">
-        hrManager
-    </a>
-        <div class="sidebar-toggle-box">
-        <div class="fa fa-bars"></div>
-    </div>
-</div>
-<!--logo end-->
-<div class="nav notify-row" id="top_menu">
-    <!--  notification start -->
-    <ul class="nav top-menu">
-        <!-- settings start -->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-tasks"></i>
-                <span class="badge bg-success">8</span>
-            </a>
-            <ul class="dropdown-menu extended tasks-bar">
-                <li>
-                    <p class="">You have 8 pending tasks</p>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Target Sell</h5>
-                                <p>25% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="45">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Product Delivery</h5>
-                                <p>45% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="78">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Payment collection</h5>
-                                <p>87% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="60">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Target Sell</h5>
-                                <p>33% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="90">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-
-                <li class="external">
-                    <a href="#">See All Tasks</a>
-                </li>
-            </ul>
-        </li>
-        <!-- settings end -->
-        <!-- inbox dropdown start-->
-        <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-important">4</span>
-            </a>
-            <ul class="dropdown-menu extended inbox">
-                <li>
-                    <p class="red">You have 4 Mails</p>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Jonathan Smith</span>
-                                <span class="time">Just now</span>
-                                </span>
-                                <span class="message">
-                                    Hello, this is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/1.png"></span>
-                                <span class="subject">
-                                <span class="from">Jane Doe</span>
-                                <span class="time">2 min ago</span>
-                                </span>
-                                <span class="message">
-                                    Nice admin template
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Tasi sam</span>
-                                <span class="time">2 days ago</span>
-                                </span>
-                                <span class="message">
-                                    This is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/2.png"></span>
-                                <span class="subject">
-                                <span class="from">Mr. Perfect</span>
-                                <span class="time">2 hour ago</span>
-                                </span>
-                                <span class="message">
-                                    Hi there, its a test
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">See all messages</a>
-                </li>
-            </ul>
-        </li>
-        <!-- inbox dropdown end -->
-        <!-- notification dropdown start-->
-        <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
-                <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
-            </a>
-            <ul class="dropdown-menu extended notification">
-                <li>
-                    <p>Notifications</p>
-                </li>
-                <li>
-                    <div class="alert alert-info clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #1 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-danger clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #2 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-success clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #3 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
-        </li>
-        <!-- notification dropdown end -->
-    </ul>
-    <!--  notification end -->
-</div>
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        <li>
-            <input type="text" class="form-control search" placeholder=" Search">
-        </li>
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/2.png">
-                <span class="username"><?php echo $_SESSION["fullname"]; ?></span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="logout.php"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-       
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
+<?php include ("inc/header-part.inc.php"); ?>
 <!--header end-->
 <!--sidebar start-->
 <aside>
     <div id="sidebar" class="nav-collapse">
         <!-- sidebar menu start-->
-        <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    <a class="active" href="index.php">
-                        <i class="fa fa-dashboard"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    
-                </li>
-                
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-cog"></i>
-                        <span>Administration</span>
-                    </a>
-                     <ul class="sub">
-                        <li><a href="staffinfo.php?code=<?php echo $_SESSION["fullname"]; ?>">Staff</a></li>
-                        
-                        <li><a href="employers.php?code=<?php echo $_SESSION["fullname"]; ?>">Employers</a></li>
-                        <li></li>
-                    </ul>
-                    
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-bullhorn"></i>
-                        <span>Vacancies </span>
-                    </a>
-                     <ul class="sub">
-                        <li><a href="allvacancies.php?code=<?php echo $_SESSION["fullname"]; ?>">All Vacancies</a></li>
-                        <li><a href="newvacancies.php?code=<?php echo $_SESSION["fullname"]; ?>">New Vacancies</a></li>
-                        <li><a href="openvacancies.php?code=<?php echo $_SESSION["fullname"]; ?>">Open Vacancies</a></li>
-                        <li><a href="closedvacancies.php?code=<?php echo $_SESSION["fullname"]; ?>">Closed Vacancies</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-user"></i>
-                        <span>Applicants</span>
-                    </a>
-                 <ul class="sub">
-                        <li><a href="allapplicants.php?code=<?php echo $_SESSION["fullname"]; ?>">All Applicants</a></li>
-                        <li><a href="employedapplicants.php?code=<?php echo $_SESSION["fullname"]; ?>">Employed Applicants</a></li>
-                                             
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-suitcase"></i>
-                        <span>Interview</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="allinterviews.php?code=<?php echo $_SESSION["fullname"]; ?>">All Interviews</a></li>
-                        <li><a href="newinterview.php?code=<?php echo $_SESSION["fullname"]; ?>">New Interview</a></li>
-                        <li><a href="allinterviews.php?code=<?php echo $_SESSION["fullname"]; ?>">Manage Interview</a></li>
-                        
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-envelope"></i>
-                        <span>Mail Center</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="https://mail.google.com" target="_blank">Inbox</a></li>
-                        <li><a href="https://mail.google.com" target="_blank">Compose Mail</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class=" fa fa-table"></i>
-                        <span>Reports</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="applicantreports.php?code=<?php echo $_SESSION["fullname"]; ?>">Applicant's Reports</a></li>
-                        <li><a href="vacancyreports.php?code=<?php echo $_SESSION["fullname"]; ?>">Vacancies Reports</a></li>
-                        <li><a href="interviewreports.php?code=<?php echo $_SESSION["fullname"]; ?>">Interview's Reports</a></li>
-                        <li><a href="employerreports.php?code=<?php echo $_SESSION["fullname"]; ?>">Employer's Reports</a></li>
-                    </ul>
-                   
-                </li>
-                
-                
-                <li>
-                    <a href="logout.php">
-                        <i class="fa fa-sign-out"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>            </div>
-        <!-- sidebar menu end-->
-    </div>
+    <?php include("inc/sidebar.php"); ?>
 </aside>
 <!--sidebar end-->
 <!--main content start-->
@@ -369,7 +72,7 @@ $totalRows_all_applicants = mysqli_num_rows($all_applicants);
 					</div>
 					<div class="col-md-8 market-update-left">
 					<h4>Vacancies</h4>
-						<h3>0</h3>
+						<h3><?php echo "".$row_rs_count['COUNT(*)']."";?></h3>
 						<p>Vacancies Record Saved</p>
 					</div>
 				  <div class="clearfix"> </div>
@@ -478,11 +181,13 @@ $totalRows_all_applicants = mysqli_num_rows($all_applicants);
                                         <th  style="text-align: center; color: #900;">End Date</th>
                                     </tr>
                                     <tr>
-                                      <th>&nbsp;</th>
-                                      <th>&nbsp;</th>
-                                      <th>&nbsp;</th>
-                                      <th>&nbsp;</th>
+                                        <?php $sn =1; do { ?>
+                                      <th><?php echo $sn++; ?></th>
+                                      <th><?php echo $row_all_vacancies['vacancy_name']; ?></th>
+                                      <th><?php echo $row_all_vacancies['date_opening']; ?></th>
+                                      <th><?php echo $row_all_vacancies['closing_date']; ?></th>
                                   </tr>
+                                   <?php } while ($row_all_vacancies = mysqli_fetch_assoc($all_vacancies)); ?>
                                 </thead>
                                 <tbody>
                                 </tbody>
